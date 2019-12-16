@@ -18,6 +18,7 @@ void vmfill(virtual_memory &vm)
 
 int main()
 {
+    // test 1
     virtual_memory vm;
     vmfill(vm);
 
@@ -37,6 +38,7 @@ int main()
         return -1;
     }
 
+    // test 2
     virtual_memory vm1;
     vmfill(vm1);
 
