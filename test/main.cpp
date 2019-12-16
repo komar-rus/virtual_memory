@@ -21,5 +21,36 @@ int main()
     virtual_memory vm;
     vmfill(vm);
 
+    uint8_t a = vm[0];
+    vm += 100;
+
+    uint8_t b = vm[0];
+    vm += 100;
+
+    uint8_t c = vm[0];
+    vm += 100;
+
+    if (0 != a
+        && 1 != b
+        && 2 != c)
+    {
+        return -1;
+    }
+
+    virtual_memory vm1;
+    vmfill(vm1);
+
+    uint8_t a1 = vm1[0];
+
+    vm1 += 100;
+    vm1 -= 100;
+
+    uint8_t b2 = vm1[0];
+
+    if (a1 != b2)
+    {
+        return -1;
+    }
+
     return 0;
 }
