@@ -35,7 +35,7 @@ public:
     virtual_memory_t<T> &operator = (const virtual_memory_t<T> &vm);
     virtual_memory_t<T> &operator = (virtual_memory_t<T> &&vm);
 
-    T &operator [] (size_t n);
+    T &operator [] (size_t n) const;
     virtual_memory_t<T> &operator += (size_t n);
     virtual_memory_t<T> &operator -= (size_t n);
     virtual_memory_t<T> &operator ++ ();
@@ -45,7 +45,7 @@ public:
     virtual_memory_t<T> operator + (size_t n) const;
     virtual_memory_t<T> operator - (size_t n) const;
 
-    T &operator * (void);
+    T &operator * (void) const;
 
     void push_back(T *pData, size_t size);
     void push_back(virtual_memory_t<T> &pData, size_t size);
@@ -293,13 +293,13 @@ virtual_memory_t<T> virtual_memory_t<T>::operator + (size_t n) const
 }
 
 template <class T>
-T &virtual_memory_t<T>::operator * (void)
+T &virtual_memory_t<T>::operator * (void) const
 {
     return m_pData[0];
 }
 
 template <class T>
-T &virtual_memory_t<T>::operator [] (size_t n)
+T &virtual_memory_t<T>::operator [] (size_t n) const
 {
     ptrdiff_t pos = m_pos + n;
 
