@@ -5,6 +5,7 @@
 #include <vector>
 #include <cstring>
 #include <assert.h>
+#include <initializer_list>
 
 template <class T = uint8_t>
 class virtual_memory_t
@@ -28,6 +29,7 @@ public:
     virtual_memory_t(const virtual_memory_t<T> &copy);
     virtual_memory_t(virtual_memory_t<T> *p);
     virtual_memory_t(virtual_memory_t<T> &&copy);
+    virtual_memory_t(const std::initializer_list<std::pair<T*, size_t>> &list);
 
     ~virtual_memory_t();
 
@@ -105,6 +107,14 @@ virtual_memory_t<T>::virtual_memory_t(virtual_memory_t<T> &&copy)
     std::swap(copy.m_nEntry, m_nEntry);
     std::swap(copy.m_pos, m_pos);
     std::swap(copy.m_pData, m_pData);
+}
+
+template <class T>
+virtual_memory_t<T>::virtual_memory_t(const std::initializer_list<std::pair<T*, size_t>> &list):
+    virtual_memory_t()
+{
+    for (auto &pair : list)
+        push_back(pair.first, pair.second);
 }
 
 template <class T>
