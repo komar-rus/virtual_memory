@@ -73,5 +73,15 @@ int main()
         return -1;
     }
 
+    // test 4
+    virtual_memory vm3 { {pData1, (size_t)100}, {pData2, (size_t)100} };
+    virtual_memory vm4;
+    vm4.push_back(vm3, 200);
+
+    if (200 != vm4.size())
+    {
+        return -1;
+    }
+
     return 0;
 }
