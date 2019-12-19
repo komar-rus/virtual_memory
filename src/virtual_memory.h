@@ -50,7 +50,7 @@ public:
     T &operator * (void) const;
 
     void push_back(T *pData, size_t size);
-    void push_back(virtual_memory_t<T> &pData, size_t size);
+    void push_back(const virtual_memory_t<T> &pData, size_t size);
 
     inline size_t size() const { return m_size; };
     inline size_t length() const { return m_size - m_pos; };
@@ -140,7 +140,7 @@ void virtual_memory_t<T>::push_back(T *pData, size_t size)
 }
 
 template <class T>
-void virtual_memory_t<T>::push_back(virtual_memory_t<T> &vm, size_t size)
+void virtual_memory_t<T>::push_back(const virtual_memory_t<T> &vm, size_t size)
 {
     if (nullptr == m_listEntry)
         m_listEntry = std::make_shared<std::vector<entry_t>>();
@@ -153,7 +153,7 @@ void virtual_memory_t<T>::push_back(virtual_memory_t<T> &vm, size_t size)
         const entry_t &entry = vm.m_listEntry->at(n);
 
         size_t length = std::min(size, (size_t)(entry.stop - pos));
-        add(entry.pData + (pos - entry.start), length);
+        push_back(entry.pData + (pos - entry.start), length);
 
         size -= length;
         pos += length;
