@@ -83,5 +83,16 @@ int main()
         return -1;
     }
 
+    // test 5
+    virtual_memory vm5 { {pData1, (size_t)100}, {pData2, (size_t)100} };
+    vm5.memset(0xff, 200);
+
+    vm5 += 150;
+
+    if (0xff != vm5[0])
+    {
+        return -1;
+    }
+
     return 0;
 }
